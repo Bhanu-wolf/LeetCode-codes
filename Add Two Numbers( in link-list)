@@ -1,0 +1,90 @@
+/*
+2. Add Two Numbers
+
+You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
+
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+ 
+
+Example 1:
+
+
+Input: l1 = [2,4,3], l2 = [5,6,4]
+Output: [7,0,8]
+Explanation: 342 + 465 = 807.
+Example 2:
+
+Input: l1 = [0], l2 = [0]
+Output: [0]
+Example 3:
+
+Input: l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
+Output: [8,9,9,9,0,0,0,1]
+*/
+/..........................code........................../
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        A call=new A();
+        int n1=call.getNumber(l1);
+        int n2=call.getNumber(l2);
+         n1=n1+n2;
+        int x=0;
+        while(n1>0)
+        {
+            x=n1%10;
+            call.addLink(x);
+            x=x/10;
+        }
+    } 
+}
+class A{
+    
+    public int getNumber(ListNode head)
+    {
+        ListNode temp=head;
+        String s="";
+        while(temp!=null)
+        {
+            s+=temp.val;
+            temp=temp.next;
+        }
+        StringBuffer x=new StringBuffer(s);
+        x=x.reverse();
+        int n= Integer.parseInt(x);
+        return n;
+    }
+    Node head;
+    Node tail;
+    class Node{
+        int data;
+        Node next;
+        Node(int data){
+            this.data=data;
+            this.next=null;
+            
+        }
+    }
+    public void addLink(int data)
+    {
+        Node newNode=new Node(data);
+        if(head==null&&tail==null)
+            head=tail=newNode;
+        else
+        {
+            tail.next=newNode;
+            tail=newNode;
+        }
+    }
+}
+//NotCompleted
