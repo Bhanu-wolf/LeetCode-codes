@@ -1,0 +1,115 @@
+/*
+Given an array of integers nums sorted in non-decreasing order, find the starting and ending position of a given target value.
+
+If target is not found in the array, return [-1, -1].
+
+You must write an algorithm with O(log n) runtime complexity.
+Example 1:
+
+Input: nums = [5,7,7,8,8,10], target = 8
+Output: [3,4]
+Example 2:
+
+Input: nums = [5,7,7,8,8,10], target = 6
+Output: [-1,-1]
+Example 3:
+
+Input: nums = [], target = 0
+Output: [-1,-1]
+*/
+..............................My BruteForce code..........................
+/*
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        int a=0,b=0,flag1=0,flag2=0;
+        if(nums.length==1){
+            if(target==nums[0])
+                return new int[]{0,0};
+            }
+        for(int i=0;i<nums.length;i++){
+        if((nums[i]==target))
+        { flag1=1;
+            a=i;
+            break;
+        }    }
+        for(int j=nums.length-1;j>=0;j--){
+           if( (nums[j]==target))
+           {  flag2=1;
+               b=j;
+            break;
+        }}
+        if(flag1==1&&flag2==1){
+        return new int[]{a,b};
+        }
+    
+            return new int[]{-1,-1};
+}}
+*/
+.............................code with binary.....................
+/*
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        int s1=0,e1=nums.length-1,s2=0,e2=nums.length-1, mid1=0, mid2=0,x1=-1,x2=-1;
+       //finding first occurence
+        while(s1<=e1)
+        {
+            mid1=s1+(e1-s1)/2;
+            if(nums[mid1]==target){
+                x1=mid1;
+                e1=mid1-1;}
+            else if(nums[mid1]>target)
+                e1=mid1-1;
+            else
+                s1=mid1+1;
+                
+        }
+        //finding last ocuurence
+        while(s2<=e2)
+        {
+            mid2=s2+(e2-s2)/2;
+            if(nums[mid2]==target){
+                x2=mid2;
+                s2=mid2+1;
+            }
+             else if(nums[mid2]>target)
+                e2=mid2-1;
+            else
+                s2=mid2+1;
+        }
+ if(x1!=-1&&x2!=-1)
+     return new int[]{x1,x2};
+        
+return new int[]{-1,-1};
+}
+}*/
+.............................another solution..............................
+/*
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        int[] x={-1,-1};
+        x[0]=search(nums,target,true);
+        x[1]=search(nums,target,false);
+        return x;
+        
+}
+    public int search(int[]nums,int target,boolean searchFirst){
+        int s=0,e=nums.length-1,ans=-1,mid=0;
+        while(s<=e)
+        {
+            mid=s+(e-s)/2;
+            if(nums[mid]==target)
+            {ans=mid;
+                if(searchFirst)
+                    e=mid-1;
+             else
+                 s=mid+1;
+            }
+            else if(nums[mid]<target)
+                s=mid+1;
+            else
+                e=mid-1;
+        }
+        return ans;
+    }
+}
+*/
