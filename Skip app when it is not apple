@@ -1,0 +1,29 @@
+public class RecursionString1 {
+    public static void main(String[] args) {
+        String str = "appleappbhanuapple";
+
+        System.out.println(removeString1(str, "app", 0, "apple"));
+    }
+
+    
+    static String removeString1(String str, String target, int i, String part) {
+        if(i>=str.length())
+        return str;
+        i = str.indexOf(target,i+1);//have to do i+1 otherwise it stuck in infinite loop
+        if (i < 0)
+            return str;
+        if (i >= 0) {
+            if (!(str.substring(i, i + part.length()).startsWith(part)))
+                str = modify1(str, target, i);
+    
+        }
+
+        return removeString1(str, target, i+1, part);//also here i+1 otherwise stuck in infinite loop
+    }
+
+    static String modify1(String str, String target, int i) {
+        String str1 = "";
+        str1 = str.substring(0, i).concat(str.substring(i + target.length()));
+        return str1;
+    }
+}
