@@ -1,0 +1,71 @@
+Input: s = "leeetcode"
+Output: "leetcode"
+Explanation:
+Remove an 'e' from the first group of 'e's to create "leetcode".
+No three consecutive characters are equal, so return "leetcode".
+
+///-------------------------solution-----------------------
+
+class Solution {
+    public String makeFancyString(String s) {
+      // 1-- soltuion time limit exceed // 
+      //return makeFancy(s,0);
+
+
+    //   // 2--- solution time limit exceed  
+    //     for(int i=0;i<s.length();){
+    //         int m=s.indexOf(consecutive(s.charAt(i)));
+    //        if(m>=0)
+    //       s=modify(s,m);
+    //      else
+    //      i++;
+    //     }
+    //     return s;
+    
+    // 3------solution------it worked it is best
+  char[] ar= s.toCharArray();
+        StringBuilder sb= new StringBuilder();
+        
+         if(ar.length==2){
+            sb.append(ar[ar.length-2]).append(ar[ar.length-1]);
+            return sb.toString();
+         }
+        else if(ar.length==1){
+            sb.append(ar[ar.length-1]);
+            return sb.toString();
+        }
+        
+
+        for(int i=0;i<ar.length-2;i++)
+        {
+            if((ar[i]!=ar[i+1]) || (ar[i+1]!=ar[i+2]))
+                sb.append(ar[i]);      
+        }
+         sb.append(ar[ar.length-2]).append(ar[ar.length-1]);
+       
+        return sb.toString();
+    
+    }
+//     static String makeFancy(String s,int i)
+//     {
+//         if(i>=s.length())
+//         return s;
+//         int m=s.indexOf(consecutive(s.charAt(i)));
+//          if(m>=0)
+//          { s=modify(s,m);
+//          return makeFancy(s,i);
+//          }
+//         return makeFancy(s,i+1);
+//     }
+//     static String modify(String s,int m)
+//     {
+//         String s1="";
+//         s1=s.substring(0,m).concat(s.substring(m+1));
+//         return s1;
+//     }
+//    static String consecutive(char a)
+//     { 
+//         String s=Character.toString(a);
+//         return s.concat(s).concat(s);
+//     }
+}
