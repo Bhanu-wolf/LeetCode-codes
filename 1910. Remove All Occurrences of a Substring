@@ -1,0 +1,27 @@
+Input: s = "daabcbaabcbc", part = "abc"
+Output: "dab"
+Explanation: The following operations are done:
+- s = "daabcbaabcbc", remove "abc" starting at index 2, so s = "dabaabcbc".
+- s = "dabaabcbc", remove "abc" starting at index 4, so s = "dababc".
+- s = "dababc", remove "abc" starting at index 3, so s = "dab".
+Now s has no occurrences of "abc".
+-----------------------------------------using Recursion---------------------------------------------------------
+class Solution {
+    public String removeOccurrences(String s, String part) {
+        return removeString(s,part,0);
+    }
+     static String removeString(String str, String target, int i) {
+        i = str.indexOf(target);
+        if (i < 0)
+            return str;
+        else
+            str = modify(str, target, i);
+        return removeString(str, target, i + 1);
+    }
+
+    static String modify(String str, String target, int i) {
+        String str1 = "";
+        str1 = str.substring(0, i).concat(str.substring(i + target.length()));
+        return str1;
+    }
+}
