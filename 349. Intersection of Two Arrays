@@ -1,0 +1,72 @@
+349. Intersection of Two Arrays
+
+iven two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must be unique and you may return the result in any order.
+
+ 
+
+Example 1:
+
+Input: nums1 = [1,2,2,1], nums2 = [2,2]
+Output: [2]
+
+
+
+
+--------------solution---------------------
+
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        //int x=Math.max(nums1.length,nums2.length);
+       
+        List<Integer>list=new ArrayList<>();
+        int j=0;
+        for(int i=0;i<nums1.length;i++)
+        {
+             if(search(nums2,nums1[i]))
+             {
+                 if(!(list.contains(nums1[i])))
+                 {
+                     list.add(nums1[i]);
+                 }
+             }
+        }
+        int []arr=new int[list.size()];
+        for(int i=0;i<list.size();i++)
+          arr[i]=list.get(i);
+
+
+        return arr;
+    }
+    static boolean search(int[]arr,int key)
+    {
+        Arrays.sort(arr);
+        int s=0,e=arr.length-1,mid=0;
+        while(s<=e)
+        {
+            mid=s+(e-s)/2;
+            if(arr[mid]==key)
+            return true;
+            else if(arr[mid]>key)
+            e=mid-1;
+            else
+            s=mid+1;
+        } 
+        return false;
+    }
+        static boolean search(List<Integer>arr,int key)
+    {
+        Collections.sort(arr);
+        int s=0,e=arr.size()-1,mid=0;
+        while(s<=e)
+        {
+            mid=s+(e-s)/2;
+            if(arr.get(mid)==key)
+            return true;
+            else if(arr.get(mid)>key)
+            e=mid-1;
+            else
+            s=mid+1;
+        } 
+        return false;
+    }
+}
