@@ -1,0 +1,57 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+ 
+ Input: head = [1,2,3,4,5], left = 2, right = 4
+Output: [1,4,3,2,5]
+
+
+reverse a linklist only a part from left to right
+
+
+class Solution {
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        if(head==null||head.next==null)
+        return  head;
+        if(left==right)
+        return head;
+        ListNode leftNode=getNode(head,left);
+        ListNode rightNode=getNode(head,right);
+        ListNode prev=null,current=leftNode,nextNode=current.next;
+        while(current!=rightNode)
+        {
+            current.next=prev;
+            prev=current;
+            current=nextNode;
+            nextNode=nextNode.next;
+        }
+        leftNode.next=current.next;
+        current.next=prev;
+        if(leftNode==head)
+        return current;
+        else
+        {
+            ListNode leftPrev=getNode(head,left-1);
+            leftPrev.next=current;
+        }
+        return head;
+    }
+    static ListNode getNode(ListNode head,int n)
+    {
+        int i=1;
+        ListNode temp=head;
+        while(i<n)
+        {
+            temp=temp.next;
+            i++;
+        }
+        return temp;
+    }
+}
