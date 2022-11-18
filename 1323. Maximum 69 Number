@@ -1,0 +1,50 @@
+Input: num = 9669
+Output: 9969
+Explanation: 
+Changing the first digit results in 6669.
+Changing the second digit results in 9969.
+Changing the third digit results in 9699.
+Changing the fourth digit results in 9666.
+The maximum number is 9969.
+
+
+--solution----------------
+
+class Solution {
+    public int maximum69Number (int num) {
+        // String s=Integer.toString(num);
+    //     String str[]=s.split("");
+    //     for(int i=0;i<str.length;i++)
+    //     {
+            
+    //         if(str[i].equals("6"))
+    //          {
+    //              str[i]="9";
+    //              break;
+    //          }
+    //     }
+    //  int ans=0;
+    //  for(String s1:str)
+    //    ans=ans*10+Integer.parseInt(s1);
+    // String str=s.replaceFirst("6","9");
+    // return Integer.parseInt(str);
+int right=-1;
+int count=0,temp=num;
+while(temp>0)
+{
+    int x=temp%10;
+    if(x==6)
+    right=count;
+    count++;
+    temp=temp/10;
+}
+if(right==-1)
+return num;
+int x=(int)(Math.pow(10,right));
+
+return (3*x)+num;
+    }
+}
+// if (rightDigCount == -1) return num;
+//         int ans = num + (3 * Math.pow(10, rightDigCount));
+//         return ans;
