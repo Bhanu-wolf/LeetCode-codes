@@ -1,0 +1,44 @@
+Example 1:
+
+Input: s = "IDID"
+Output: [0,4,1,3,2]
+Example 2:
+
+Input: s = "III"
+Output: [0,1,2,3]
+
+----------solution---------------
+
+ class Solution {
+    public int[] diStringMatch(String str) {
+        int i=0;
+        int l=str.length();
+        int[]nums=new int[l+1];
+        if(l==1&&str.charAt(0)=='I')
+        return new int[]{0,1};
+        if(l==1&&str.charAt(0)=='D')
+        return new int[]{1,0};
+        int s=0,e=str.length();
+       
+        while(s<e)
+        {
+            if(str.charAt(i)=='I')
+            {
+                nums[i++]=s;
+                s++;
+            }
+            else
+            {
+                nums[i++]=e;
+                e--;
+            }
+            //another way of doing
+            // nums[i]=str.charAt(i)=='I' ? s++ : e--;
+            // i++;
+        }
+       nums[i]=s;
+       
+        return nums;
+    }
+}
+  
