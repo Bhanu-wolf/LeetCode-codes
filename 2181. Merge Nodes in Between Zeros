@@ -1,0 +1,62 @@
+You are given the head of a linked list, which contains a series of integers separated by 0's. The beginning and end of the linked list will have Node.val == 0.
+
+For every two consecutive 0's, merge all the nodes lying in between them into a single node whose value is the sum of all the merged nodes. The modified list should not contain any 0's.
+
+Return the head of the modified linked list.
+
+ 
+
+Example 1:
+
+
+Input: head = [0,3,1,0,4,5,2,0]
+Output: [4,11]
+Explanation: 
+The above figure represents the given linked list. The modified list contains
+- The sum of the nodes marked in green: 3 + 1 = 4.
+- The sum of the nodes marked in red: 4 + 5 + 2 = 11.
+
+------------------------------Solution------------------------------
+
+class Solution {
+    public ListNode mergeNodes(ListNode head) {
+        ListNode Head=null,Tail=null;
+        ListNode h1=head,t1=head,prev=null;
+        head=head.next;
+        int value=0;
+        while(head!=null)
+        {
+        value+=head.val;
+        head=head.next;
+        if(head.val==0)
+        {
+            // Tail=makeNode(Head,Tail,value);
+            
+            //     if(Head==null)
+            //     Head=Tail;
+           t1.val=value;
+           prev=t1;
+           t1=t1.next;
+            
+            head=head.next;
+            value=0;
+        }
+
+        }
+        prev.next=null;
+        return h1;
+    }
+    // static ListNode makeNode(ListNode head,ListNode tail,int val)
+    // {
+    //     ListNode node=new ListNode(val,null);
+    //     if(head==null)
+    //     head=tail=node;
+    //     else
+    //     {
+    //         tail.next=node;
+    //         tail=node;
+    //     }
+    //     return tail;
+    // }
+    
+}
