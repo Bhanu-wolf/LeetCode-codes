@@ -1,0 +1,72 @@
+Given the roots of two binary trees p and q, write a function to check if they are the same or not.
+
+Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.
+
+ 
+
+Example 1:
+
+
+Input: p = [1,2,3], q = [1,2,3]
+Output: true
+Example 2:
+
+
+Input: p = [1,2], q = [1,null,2]
+Output: false
+
+
+--------------solution--------------
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    boolean flag=true;
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        preorder(p,q);
+        return flag;
+    }
+    public void preorder(TreeNode p,TreeNode q)
+    {
+        if((p==null&&q!=null)||(q==null&&p!=null))
+          flag=false;
+        if(p==null && q==null){
+        flag=true;
+        return;}
+        if(p!=null&q!=null)
+        {
+        if(p.val!=q.val)
+       {
+        flag=false;
+        return;
+        }}
+        else if(p==null&&q!=null||p!=null&&q==null){
+        flag=false;
+        return;
+        }
+        if(p.left!=null&&q.left!=null)
+        preorder(p.left,q.left);
+        else if(p.left==null&&q.left!=null||p.left!=null&&q.left==null){
+        flag=false;
+        return;}
+        if(p.right!=null&&q.right!=null)
+        preorder(p.right,q.right);
+        else if(p.right==null&&q.right!=null||p.right!=null&&q.right==null){
+        flag=false;
+        return;}
+    }
+}
