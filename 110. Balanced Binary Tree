@@ -1,0 +1,37 @@
+Example 1:
+
+
+Input: root = [3,9,20,null,null,15,7]
+Output: true
+Example 2:
+
+
+Input: root = [1,2,2,3,3,null,null,4,4]
+Output: false
+Example 3:
+
+Input: root = []
+Output: true
+
+class Solution {
+    public boolean isBalanced(TreeNode root) {
+        
+        if(root==null)
+        return true;
+        int lh=maxDepth(root.left);
+        int rh=maxDepth(root.right);
+        if(Math.abs(lh-rh)>1)return false;
+        boolean l=isBalanced(root.left);
+        boolean r=isBalanced(root.right);
+        if(l&&r)
+        return true;
+        return false;
+    }
+     public int maxDepth(TreeNode root) {
+        if(root==null)
+        return 0;
+        if(root.left==null&&root.right==null)
+        return 1;
+        return 1+Math.max(maxDepth(root.left),maxDepth(root.right));
+    }
+}
